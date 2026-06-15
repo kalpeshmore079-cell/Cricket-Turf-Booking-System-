@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalpesh Cricket Turf Booking</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 3D Canvas Background -->
+    <div id="canvas-container"></div>
+
+    <!-- UI Overlay Wrapper -->
+    <div class="ui-wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-circle-nodes logo-icon"></i>
+                <h1>KALPESH<span>TURF</span></h1>
+            </div>
+            <div class="header-controls">
+                <!-- Performance Controller Toggle -->
+                <button id="perf-toggle" class="btn btn-secondary btn-sm" title="Toggle graphic settings">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Mode: Potato</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="booking-grid">
+            <!-- Left Panel: Turf Description -->
+            <section class="panel glass-panel turf-info-panel">
+                <div class="panel-header">
+                    <span class="badge" id="turf-badge">Premium Pitch</span>
+                    <h2 id="turf-title">Wankhede Premium</h2>
+                    <div class="rating">
+                        <i class="fa-solid fa-star text-gold"></i>
+                        <span id="turf-rating">4.9</span>
+                        <span class="reviews-count">(120+ reviews)</span>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <p id="turf-desc" class="turf-desc">Experience a state-of-the-art synthetic grass turf modeled after the iconic stadium. Ideal for high-intensity leather-ball and tennis-ball matches.</p>
+                    
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <i class="fa-solid fa-arrows-left-right spec-icon"></i>
+                            <div class="spec-info">
+                                <span class="spec-label">Size</span>
+                                <span class="spec-val" id="turf-size">120 x 80 ft</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-gauge-high spec-icon"></i>
+                            <div class="spec-info">
+                                <span class="spec-label">Bounce</span>
+                                <span class="spec-val" id="turf-bounce">Medium-High</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-user-group spec-icon"></i>
+                            <div class="spec-info">
+                                <span class="spec-label">Capacity</span>
+                                <span class="spec-val" id="turf-capacity">16 Players</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-cloud-sun spec-icon"></i>
+                            <div class="spec-info">
+                                <span class="spec-label">Type</span>
+                                <span class="spec-val" id="turf-type">Outdoor (Open Air)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-box">
+                        <span class="price-label">Hourly Rate</span>
+                        <div class="price-val-container">
+                            <span class="currency">₹</span>
+                            <span class="price" id="turf-price">1,200</span>
+                            <span class="per-hour">/ hr</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Booking System -->
+            <section class="panel glass-panel booking-panel">
+                <div class="panel-header">
+                    <h2>Select Schedule</h2>
+                </div>
+
+                <div class="panel-body">
+                    <!-- Date Picker -->
+                    <div class="form-group">
+                        <label for="booking-date" class="form-label">
+                            <i class="fa-regular fa-calendar-days text-neon"></i> Choose Date
+                        </label>
+                        <input type="date" id="booking-date" class="input-field" value="">
+                    </div>
+
+                    <!-- Time Slots Selector -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fa-regular fa-clock text-neon"></i> Available Slots
+                        </label>
+                        <div class="slots-grid" id="slots-container">
+                            <!-- Slots will be dynamically populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Summary & Action -->
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span>Selected Slot:</span>
+                            <strong id="summary-slot">None Selected</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <strong id="summary-total" class="text-neon">₹0</strong>
+                        </div>
+                    </div>
+
+                    <button id="book-now-btn" class="btn btn-primary btn-block" disabled>
+                        <i class="fa-solid fa-ticket"></i> Book This Turf
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Controls / Slide navigation -->
+        <footer class="slider-footer">
+            <div class="slider-nav-container">
+                <button class="nav-arrow" id="prev-btn" aria-label="Previous Turf">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="turf-slider-wrapper">
+                    <div class="slider-track-info">
+                        <span id="slider-index">1</span> <span class="slash">/</span> <span class="slider-total">5</span>
+                    </div>
+                    <input type="range" id="turf-select" class="turf-range-slider" min="0" max="4" value="0">
+                </div>
+                <button class="nav-arrow" id="next-btn" aria-label="Next Turf">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="swipe-hint">
+                <i class="fa-solid fa-circle-info"></i> Click arrows or drag slider to switch cricket grounds in 3D
+            </div>
+        </footer>
+    </div>
+
+    <!-- Holographic Glowing Booking Ticket Modal -->
+    <div id="ticket-modal" class="modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="ticket-container">
+            <div class="ticket glass-panel-neon">
+                <div class="ticket-header">
+                    <div class="ticket-logo">
+                        <i class="fa-solid fa-circle-nodes"></i>
+                        <span>KALPESH TURF</span>
+                    </div>
+                    <div class="ticket-status-badge">CONFIRMED</div>
+                </div>
+
+                <div class="ticket-body">
+                    <h3 id="ticket-turf-name">Wankhede Premium</h3>
+                    <p class="ticket-subtitle">Booking Receipt</p>
+
+                    <div class="ticket-info-grid">
+                        <div class="ticket-info-item">
+                            <span class="t-lbl">DATE</span>
+                            <span class="t-val" id="ticket-date">June 20, 2026</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <span class="t-lbl">TIME SLOT</span>
+                            <span class="t-val" id="ticket-time">06:00 PM - 08:00 PM</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <span class="t-lbl">BOOKING ID</span>
+                            <span class="t-val text-neon" id="ticket-id">KT-98317-X</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <span class="t-lbl">AMOUNT PAID</span>
+                            <span class="t-val text-gold" id="ticket-amount">₹2,400</span>
+                        </div>
+                    </div>
+
+                    <!-- Stylized Barcode -->
+                    <div class="barcode-wrapper">
+                        <div class="barcode">
+                            <!-- Dynamic stripes generated via CSS/divs -->
+                            <div class="barcode-lines"></div>
+                        </div>
+                        <span class="barcode-number">*KT-4ff88660-f2b0*</span>
+                    </div>
+                </div>
+
+                <div class="ticket-footer">
+                    <button id="close-ticket-btn" class="btn btn-secondary btn-block">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen Overlay -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader">
+            <div class="cricket-ball">
+                <div class="seam"></div>
+            </div>
+            <div class="loader-text">Loading 3D Stadiums...</div>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Main Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>
