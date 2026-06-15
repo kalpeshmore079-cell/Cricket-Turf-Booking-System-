@@ -202,16 +202,16 @@ function initUIListeners() {
     if (infoPanel) {
         let touchStartX = 0;
         let touchEndX = 0;
-        
+
         infoPanel.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
-        
+
         infoPanel.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
-        
+
         const handleSwipe = () => {
             const swipeThreshold = 50; // minimum pixels to count as swipe
             if (touchEndX < touchStartX - swipeThreshold) {
@@ -241,7 +241,7 @@ function initUIListeners() {
 // Update Active Turf Details & camera slide position
 function updateActiveTurf(index) {
     activeTurfIndex = index;
-    
+
     // Update HTML slider controls
     document.getElementById('turf-select').value = index;
     document.getElementById('slider-index').textContent = index + 1;
@@ -255,7 +255,7 @@ function updateActiveTurf(index) {
     // Populate Turf Panel Info with transition
     const infoPanel = document.querySelector('.turf-info-panel');
     infoPanel.style.opacity = '0.5';
-    
+
     setTimeout(() => {
         document.getElementById('turf-badge').textContent = info.badge;
         document.getElementById('turf-title').textContent = info.name;
@@ -267,7 +267,7 @@ function updateActiveTurf(index) {
         document.getElementById('turf-capacity').textContent = info.capacity;
         document.getElementById('turf-type').textContent = info.type;
         document.getElementById('turf-price').textContent = info.price.toLocaleString('en-IN');
-        
+
         // Update primary CSS colors dynamically for glows
         document.documentElement.style.setProperty('--color-primary', info.themeColor);
         document.documentElement.style.setProperty('--color-primary-glow', `${info.themeColor}66`);
@@ -277,7 +277,7 @@ function updateActiveTurf(index) {
         renderSlots();
         updateSummary();
         validateBookingForm();
-        
+
         infoPanel.style.opacity = '1';
     }, 150);
 }
@@ -291,7 +291,7 @@ function renderSlots() {
 
     timeSlots.forEach(slot => {
         const finalPrice = Math.round(turf.price * slot.rate);
-        
+
         const btn = document.createElement('button');
         btn.className = 'slot-btn';
         if (slot.id === selectedSlotId) {
@@ -308,13 +308,13 @@ function renderSlots() {
             } else {
                 selectedSlotId = slot.id;
             }
-            
+
             // Re-render slot selection state
             document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
             if (selectedSlotId) {
                 btn.classList.add('selected');
             }
-            
+
             updateSummary();
             validateBookingForm();
         });
@@ -365,7 +365,7 @@ function handleBookingSubmit() {
     });
     document.getElementById('ticket-time').textContent = slot.time;
     document.getElementById('ticket-amount').textContent = `₹${cost.toLocaleString('en-IN')}`;
-    
+
     // Generate a unique booking confirmation code
     const randomID = "KT-" + Math.floor(100000 + Math.random() * 900000) + "-" + String.fromCharCode(65 + Math.floor(Math.random() * 26));
     document.getElementById('ticket-id').textContent = randomID;
@@ -402,7 +402,7 @@ function initThreeJS() {
     renderer.setClearColor(0x070f0b);
     renderer.shadowMap.enabled = false; // Off by default for potato laptops
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    
+
     // Set pixel ratio capped at 1 for potato mode
     renderer.setPixelRatio(1);
     container.appendChild(renderer.domElement);
@@ -454,7 +454,7 @@ function applyPerformanceSettings(highQuality) {
     if (highQuality) {
         // High Quality Settings
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-        
+
         // Re-enable shadows
         renderer.shadowMap.enabled = true;
         scene.traverse((node) => {
@@ -474,7 +474,7 @@ function applyPerformanceSettings(highQuality) {
                 }
             }
         });
-        
+
         // Show floodlight beam cones
         floodlightBeams.forEach(beam => {
             beam.visible = true;
@@ -484,7 +484,7 @@ function applyPerformanceSettings(highQuality) {
         // Potato Mode Settings (Super fast performance)
         renderer.setPixelRatio(1);
         renderer.shadowMap.enabled = false;
-        
+
         scene.traverse((node) => {
             if (node.isLight) {
                 node.castShadow = false;
@@ -524,7 +524,7 @@ function buildTurf3D(turf, index) {
 
     // White Bowling Crease lines
     const lineMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    
+
     // Top Crease Line
     const creaseGeo = new THREE.PlaneGeometry(1.6, 0.05);
     const topCrease = new THREE.Mesh(creaseGeo, lineMat);
@@ -540,10 +540,10 @@ function buildTurf3D(turf, index) {
     // 3. Wickets (represented by 3 thin white cylinders and bails on both ends)
     const wicketGroupTop = new THREE.Group();
     wicketGroupTop.position.set(0, 0, 2.6);
-    
+
     const stumpGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.7);
     const stumpMat = new THREE.MeshLambertMaterial({ color: 0xffe082 }); // wood color
-    
+
     // 3 stumps
     const stumpL = new THREE.Mesh(stumpGeo, stumpMat);
     stumpL.position.set(-0.15, 0.35, 0);
@@ -633,7 +633,7 @@ function buildTurf3D(turf, index) {
             side: THREE.DoubleSide
         });
         const cone = new THREE.Mesh(coneGeo, coneMat);
-        
+
         // Angle the light cone down towards the pitch center
         cone.position.set(0, 1.8, 0.2);
         cone.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), pos.rot * Math.PI / 180);
@@ -641,7 +641,7 @@ function buildTurf3D(turf, index) {
         cone.rotateX(Math.PI / 2);
         cone.translateY(-3);
         cone.visible = false; // hidden initially (potato mode by default)
-        
+
         poleGroup.add(cone);
         floodlightBeams.push(cone);
 
@@ -657,15 +657,15 @@ function animate3D() {
 
     // Smoothly pan camera horizontally to match active turf X position
     cameraCurrentX += (cameraTargetX - cameraCurrentX) * 0.085;
-    
+
     // Keep camera positioned relative to current X coordinate
     camera.position.x = cameraCurrentX;
-    
+
     // Slowly orbit camera slightly back and forth based on mouse position / hover
     const time = Date.now() * 0.0008;
     camera.position.z = 18 + Math.sin(time * 0.5) * 1.5;
     camera.position.y = 10 + Math.cos(time * 0.4) * 1.0;
-    
+
     // Always look at the current moving focal center
     camera.lookAt(new THREE.Vector3(cameraCurrentX, 0.8, 0));
 
@@ -674,7 +674,7 @@ function animate3D() {
     if (activeGroup) {
         // Bob wickets up and down slightly
         const bob = Math.sin(Date.now() * 0.003) * 0.04;
-        
+
         // Find wickets in active group (child indices 4 and 5 in group)
         activeGroup.children.forEach(child => {
             if (child.isGroup) {

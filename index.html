@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- 3D Canvas Background -->
     <div id="canvas-container"></div>
@@ -49,8 +53,9 @@
                 </div>
 
                 <div class="panel-body">
-                    <p id="turf-desc" class="turf-desc">Experience a state-of-the-art synthetic grass turf modeled after the iconic stadium. Ideal for high-intensity leather-ball and tennis-ball matches.</p>
-                    
+                    <p id="turf-desc" class="turf-desc">Experience a state-of-the-art synthetic grass turf modeled after
+                        the iconic stadium. Ideal for high-intensity leather-ball and tennis-ball matches.</p>
+
                     <div class="spec-grid">
                         <div class="spec-item">
                             <i class="fa-solid fa-arrows-left-right spec-icon"></i>
@@ -145,7 +150,8 @@
                 </button>
                 <div class="turf-slider-wrapper">
                     <div class="slider-track-info">
-                        <span id="slider-index">1</span> <span class="slash">/</span> <span class="slider-total">5</span>
+                        <span id="slider-index">1</span> <span class="slash">/</span> <span
+                            class="slider-total">5</span>
                     </div>
                     <input type="range" id="turf-select" class="turf-range-slider" min="0" max="4" value="0">
                 </div>
@@ -153,7 +159,7 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
-            
+
             <div class="swipe-hint">
                 <i class="fa-solid fa-circle-info"></i> Click arrows or drag slider to switch cricket grounds in 3D
             </div>
@@ -228,4 +234,5 @@
     <!-- Main Script JS -->
     <script src="script.js"></script>
 </body>
+
 </html>
