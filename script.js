@@ -196,6 +196,46 @@ function initUIListeners() {
     // Modal Close
     closeTicketBtn.addEventListener('click', toggleModal);
     modalOverlay.addEventListener('click', toggleModal);
+
+    // Touch Swipe support for mobile on turf info panel
+    const infoPanel = document.querySelector('.turf-info-panel');
+    if (infoPanel) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        infoPanel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        infoPanel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        const handleSwipe = () => {
+            const swipeThreshold = 50; // minimum pixels to count as swipe
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe Left -> Next
+                if (activeTurfIndex < turfData.length - 1) {
+                    updateActiveTurf(activeTurfIndex + 1);
+                }
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe Right -> Prev
+                if (activeTurfIndex > 0) {
+                    updateActiveTurf(activeTurfIndex - 1);
+                }
+            }
+        };
+    }
+
+    // Dynamic swipe hint text for mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+        const swipeHint = document.querySelector('.swipe-hint');
+        if (swipeHint) {
+            swipeHint.innerHTML = '<i class="fa-solid fa-hand-pointer"></i> Swipe card left/right or use controls to switch fields in 3D';
+        }
+    }
 }
 
 // Update Active Turf Details & camera slide position
