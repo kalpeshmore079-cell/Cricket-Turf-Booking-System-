@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cricket Turfs - Book Pitches Online</title>
+    <link rel="stylesheet" href="css/style.css?v=3.0">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">🏏 <span>Turf</span>Arena</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <span id="userEmailDisplay" class="user-badge" style="display: none;">👤 Guest</span>
+            <button id="logoutBtn" class="btn btn-sm btn-outline" style="display: none; padding: 6px 12px; font-size: 13px;">Logout</button>
+            <a href="admin.html" class="nav-link" style="color: var(--accent-purple);">Admin</a>
+        </div>
+    </nav>
+
+    <div class="overlay">
+        <div class="container">
+            <h1 style="color: white; font-size: 38px; margin-bottom: 8px; text-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                🏏 Available Cricket Turfs
+            </h1>
+            <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 16px;">
+                Choose your ground, pick a convenient time slot, and lock in your match.
+            </p>
+
+            <!-- Search and Filter Bar -->
+            <div class="filter-bar">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search turf by name or area (e.g., Mumbai, Pune, Box Arena)...">
+            </div>
+
+            <!-- Turfs Grid List -->
+            <div id="turfList" class="turf-grid"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/turf.js?v=3.0"></script>
+</body>
+</html>

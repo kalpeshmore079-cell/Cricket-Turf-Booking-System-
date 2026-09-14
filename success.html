@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed! - Cricket Turf Booking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">🏏 <span>Turf</span>Arena</a>
+        <div class="nav-links">
+            <a href="turfs.html" class="nav-link">Available Turfs</a>
+            <a href="index.html" class="nav-link">Home</a>
+        </div>
+    </nav>
+
+    <div class="overlay">
+        <div class="glass-card success-card">
+            <span class="success-icon">🎉</span>
+            <h1 style="color: #059669; font-size: 32px; margin-bottom: 6px;">Booking Confirmed!</h1>
+            <p style="color: #64748b;">Your cricket turf slot is successfully reserved.</p>
+
+            <!-- Dynamic Receipt Box -->
+            <div id="receiptBox" class="receipt-box">
+                <div class="receipt-row">
+                    <span style="color: #64748b;">Booking ID:</span>
+                    <span id="rcptId" style="font-family: monospace; font-weight: 600;">#TB-XXXX</span>
+                </div>
+                <div class="receipt-row">
+                    <span style="color: #64748b;">Turf Name:</span>
+                    <span id="rcptTurf">Cricket Turf</span>
+                </div>
+                <div class="receipt-row">
+                    <span style="color: #64748b;">Location:</span>
+                    <span id="rcptLocation">Main Ground</span>
+                </div>
+                <div class="receipt-row">
+                    <span style="color: #64748b;">Date & Time:</span>
+                    <span id="rcptDateTime">--</span>
+                </div>
+                <div class="receipt-row">
+                    <span style="color: #64748b;">Booked By:</span>
+                    <span id="rcptUser">Guest</span>
+                </div>
+                <div class="receipt-row" style="margin-top: 10px; padding-top: 12px; border-top: 2px solid #e2e8f0;">
+                    <span>Total Amount:</span>
+                    <span id="rcptPrice">₹ 0</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                <a href="turfs.html" class="btn btn-primary">
+                    🏏 Book Another Turf
+                </a>
+                <a href="index.html" class="btn btn-outline" style="color: #334155; border-color: #cbd5e1;">
+                    🏠 Return Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Populate receipt from localStorage
+        try {
+            const rawData = localStorage.getItem("lastBooking");
+            if (rawData) {
+                const b = JSON.parse(rawData);
+                if (document.getElementById("rcptId")) document.getElementById("rcptId").innerText = b.bookingId || "#TB-" + Math.floor(1000 + Math.random() * 9000);
+                if (document.getElementById("rcptTurf")) document.getElementById("rcptTurf").innerText = b.turf || "Cricket Turf";
+                if (document.getElementById("rcptLocation")) document.getElementById("rcptLocation").innerText = "📍 " + (b.location || "Ground");
+                if (document.getElementById("rcptDateTime")) document.getElementById("rcptDateTime").innerText = `${b.date || ""} @ ${b.time || ""} (${b.durationHours || 1} hr)`;
+                if (document.getElementById("rcptUser")) document.getElementById("rcptUser").innerText = b.user || "User";
+                if (document.getElementById("rcptPrice")) document.getElementById("rcptPrice").innerText = "₹ " + (b.price || 0);
+            }
+        } catch (e) {
+            console.warn("Could not parse last booking receipt:", e);
+        }
+    </script>
+</body>
+</html>

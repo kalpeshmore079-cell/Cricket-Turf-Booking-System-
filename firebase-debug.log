@@ -1,0 +1,53 @@
+[debug] [2026-09-13T18:49:29.969Z] ----------------------------------------------------------------------
+[debug] [2026-09-13T18:49:29.971Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\KALPESH MORE\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2026-09-13T18:49:29.971Z] CLI Version:   15.20.0
+[debug] [2026-09-13T18:49:29.971Z] Platform:      win32
+[debug] [2026-09-13T18:49:29.971Z] Node Version:  v22.20.0
+[debug] [2026-09-13T18:49:29.971Z] Time:          Mon Sep 14 2026 00:19:29 GMT+0530 (India Standard Time)
+[debug] [2026-09-13T18:49:29.971Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-09-13T18:50:22.615Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-09-13T18:50:22.615Z] > authorizing via signed-in user (assaultgaming205@gmail.com)
+[debug] [2026-09-13T18:50:22.616Z] [iam] checking project cricket-turf-booking-52901 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-09-13T18:50:22.617Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:22.617Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:22.617Z] > refreshing access token with scopes: []
+[debug] [2026-09-13T18:50:22.618Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-13T18:50:22.619Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:22.802Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-13T18:50:22.802Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:22.802Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions [none]
+[debug] [2026-09-13T18:50:22.802Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions  x-goog-user-project=cricket-turf-booking-52901
+[debug] [2026-09-13T18:50:22.802Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-09-13T18:50:24.334Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions 401
+[debug] [2026-09-13T18:50:24.334Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2026-09-13T18:50:24.334Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-09-13T18:50:24.334Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:24.334Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:24.334Z] > refreshing access token with scopes: []
+[debug] [2026-09-13T18:50:24.335Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-13T18:50:24.335Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:24.420Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-13T18:50:24.421Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:24.422Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/cricket-turf-booking-52901:testIamPermissions had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2026-09-13T18:50:24.423Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:24.424Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:24.424Z] > refreshing access token with scopes: []
+[debug] [2026-09-13T18:50:24.424Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-13T18:50:24.424Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:25.143Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-13T18:50:25.144Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:25.145Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/cricket-turf-booking-52901 [none]
+[debug] [2026-09-13T18:50:25.810Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/cricket-turf-booking-52901 401
+[debug] [2026-09-13T18:50:25.811Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/cricket-turf-booking-52901 {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2026-09-13T18:50:25.811Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-09-13T18:50:25.811Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:25.811Z] Checked if tokens are valid: false, expires at: 1781335245365
+[debug] [2026-09-13T18:50:25.811Z] > refreshing access token with scopes: []
+[debug] [2026-09-13T18:50:25.811Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-09-13T18:50:25.811Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:25.915Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-09-13T18:50:25.915Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-09-13T18:50:25.916Z] Request to https://firebase.googleapis.com/v1beta1/projects/cricket-turf-booking-52901 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[error] 
+[error] Error: Assertion failed: resolving hosting target of a site with no site name or target name. This should have caused an error earlier

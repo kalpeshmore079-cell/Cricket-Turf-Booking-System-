@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Cricket Turf Arena</title>
+    <link rel="stylesheet" href="css/style.css?v=3.0">
+</head>
+<body>
+
+    <!-- Admin Navigation Bar -->
+    <nav class="navbar">
+        <a href="dashboard.html" class="nav-brand">
+            🏏 <span>Turf</span>Admin <span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; margin-left: 8px;">Portal</span>
+        </a>
+        <div class="nav-links">
+            <a href="turfs.html" class="nav-link" target="_blank">🌐 Live Turf Site</a>
+            <button id="adminLogoutBtn" class="btn btn-sm btn-danger">
+                🚪 Logout Admin
+            </button>
+        </div>
+    </nav>
+
+    <div class="overlay" id="dashboardContainer">
+        <div class="container">
+            
+            <!-- Summary Stats -->
+            <div class="admin-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon green">🏟️</div>
+                    <div>
+                        <div class="stat-val" id="totalTurfsCount">0</div>
+                        <div class="stat-label">Active Turfs</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">📅</div>
+                    <div>
+                        <div class="stat-val" id="totalBookingsCount">0</div>
+                        <div class="stat-label">Total Bookings</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">💰</div>
+                    <div>
+                        <div class="stat-val" id="totalRevenueCount">₹ 0</div>
+                        <div class="stat-label">Total Booking Revenue</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Navigation Tabs -->
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" id="tab-turfs" onclick="switchTab('turfs')">
+                    🏟️ Manage Turfs
+                </button>
+                <button class="tab-btn" id="tab-bookings" onclick="switchTab('bookings')">
+                    📋 Customer Bookings
+                </button>
+            </div>
+
+            <!-- SECTION 1: TURF MANAGEMENT -->
+            <div id="turfsSection" class="tab-content">
+                
+                <!-- Add Turf Card -->
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3>➕ Add New Cricket Turf</h3>
+                    <p class="card-subtitle">List a new pitch with pricing, location, and images</p>
+
+                    <form id="addTurfForm">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                            <div class="form-group">
+                                <label for="name">Turf Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="e.g. Lord's Turf Arena" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">Location / City</label>
+                                <input type="text" id="location" class="form-control" placeholder="e.g. Bandra West, Mumbai" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Hourly Rate (₹)</label>
+                                <input type="number" id="price" class="form-control" placeholder="1200" min="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="imagePreset">Select Default Image</label>
+                                <select id="imagePreset" class="form-control">
+                                    <option value="img 1.jpg">Turf Image 1 (Floodlit Pitch)</option>
+                                    <option value="img 2.jpg">Turf Image 2 (Box Cricket)</option>
+                                    <option value="img 3.jpg">Turf Image 3 (Premium Grass)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 6px;">
+                            <label for="imageCustom">Or Enter Custom Image URL (Optional)</label>
+                            <input type="url" id="imageCustom" class="form-control" placeholder="https://images.unsplash.com/photo-...">
+                        </div>
+
+                        <button type="submit" id="addTurf" class="btn btn-primary" style="margin-top: 10px;">
+                            ➕ Save & Publish Turf
+                        </button>
+                    </form>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+                    <h2 style="color: white; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-size: 24px;">
+                        All Turfs
+                    </h2>
+                </div>
+
+                <!-- Admin Turfs Grid -->
+                <div id="allTurfs" class="turf-grid"></div>
+            </div>
+
+            <!-- SECTION 2: BOOKINGS MANAGEMENT -->
+            <div id="bookingsSection" class="tab-content" style="display: none;">
+                <div class="glass-card">
+                    <h3>📋 Customer Match Bookings</h3>
+                    <p class="card-subtitle">Real-time overview of all customer ground reservations</p>
+
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Turf & Location</th>
+                                    <th>Customer Email</th>
+                                    <th>Match Date</th>
+                                    <th>Start Time</th>
+                                    <th>Total (₹)</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: #64748b; padding: 30px;">No customer bookings recorded yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- EDIT TURF MODAL -->
+    <div id="editTurfModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0; color: #1e293b;">✏️ Edit Cricket Turf</h3>
+                <button type="button" onclick="closeEditModal()" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #64748b;">✕</button>
+            </div>
+
+            <form id="editTurfForm">
+                <input type="hidden" id="editTurfId">
+
+                <div class="form-group">
+                    <label for="editName">Turf Name</label>
+                    <input type="text" id="editName" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editLocation">Location / Area</label>
+                    <input type="text" id="editLocation" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPrice">Hourly Rate (₹)</label>
+                    <input type="number" id="editPrice" class="form-control" min="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editImagePreset">Select Image Preset</label>
+                    <select id="editImagePreset" class="form-control">
+                        <option value="img 1.jpg">Turf Image 1 (Floodlit Pitch)</option>
+                        <option value="img 2.jpg">Turf Image 2 (Box Cricket)</option>
+                        <option value="img 3.jpg">Turf Image 3 (Premium Grass)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editImageCustom">Or Custom Image URL</label>
+                    <input type="url" id="editImageCustom" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button type="submit" id="saveEditBtn" class="btn btn-primary" style="flex: 1;">
+                        💾 Save Changes
+                    </button>
+                    <button type="button" onclick="closeEditModal()" class="btn btn-outline" style="color: #64748b; border-color: #cbd5e1;">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/admin.js?v=3.0"></script>
+</body>
+</html>

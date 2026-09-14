@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Match Booking - Cricket Turf</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">🏏 <span>Turf</span>Arena</a>
+        <div class="nav-links">
+            <a href="turfs.html" class="nav-link">← Back to Turfs</a>
+        </div>
+    </nav>
+
+    <div class="overlay">
+        <div class="booking-container">
+            <div class="glass-card">
+                <h2>Confirm Your Booking 🏏</h2>
+                <p class="card-subtitle">Complete match details to reserve your ground</p>
+
+                <!-- Active User Banner -->
+                <div id="userBanner" class="slot-notice" style="margin-bottom: 16px;">
+                    👤 Checking login status...
+                </div>
+
+                <!-- Turf Details Summary -->
+                <div class="turf-summary-box">
+                    <img id="turfImage" src="images/img 1.jpg" alt="Turf">
+                    <div>
+                        <h3 id="turfName" style="font-size: 18px; margin-bottom: 4px;">Cricket Turf</h3>
+                        <p id="turfLocation" style="color: #64748b; font-size: 14px; margin-bottom: 4px;">📍 Location</p>
+                        <h4 id="turfPrice" style="color: #059669; font-size: 16px;">₹ 0 / hour</h4>
+                    </div>
+                </div>
+
+                <!-- Booking Options Form -->
+                <div class="form-group">
+                    <label for="date">Select Match Date</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Select Start Time</label>
+                    <input type="time" id="time" class="form-control" value="18:00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Match Duration</label>
+                    <select id="duration" class="form-control">
+                        <option value="1">1 Hour</option>
+                        <option value="2">2 Hours</option>
+                        <option value="3">3 Hours</option>
+                        <option value="4">4 Hours</option>
+                    </select>
+                </div>
+
+                <!-- Price Summary -->
+                <div style="background: #f1f5f9; padding: 14px 18px; border-radius: var(--radius-sm); margin: 20px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #334155;">Total Amount to Pay:</span>
+                    <span id="totalPrice" style="font-size: 22px; font-weight: 800; color: #059669;">₹ 0</span>
+                </div>
+
+                <button id="confirm" class="btn btn-primary btn-block" style="font-size: 17px; padding: 14px;">
+                    ⚡ Lock & Confirm Booking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/booking.js"></script>
+</body>
+</html>
