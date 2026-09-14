@@ -2,5 +2,5 @@
 title Cricket Turf Booking Server
 cd /d "%~dp0"
 echo Starting Cricket Turf Booking Server...
-node server.js
+node local_server.js
 pause
